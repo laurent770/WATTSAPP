@@ -2151,11 +2151,35 @@ function waGetMsg() {
 // Variables backup déjà sur window
 
 function waEnvoyerFinal() {
-  var tel = (document.getElementById('waTelephone')||{}).value || '';
-  tel = tel.trim() || window._waTelCourant || '';
+  // Lire le numéro depuis TOUTES les sources disponibles
+  var tel = '';
+  
+  // Source 1 : champ DOM waTelephone
+  var fTel = document.getElementById('waTelephone');
+  if (fTel && fTel.value.trim()) tel = fTel.value.trim();
+  
+  // Source 2 : stockage global
+  if (!tel && window._waTelCourant) tel = window._waTelCourant;
+  
+  // Source 3 : parcourir tous les contacts et prendre le premier qui match le prénom affiché
+  if (!tel && window.waContacts && window.waContacts.length > 0) {
+    var prenomAffiche = (document.getElementById('waPrenom')||{}).value || '';
+    var nomAffiche = (document.getElementById('waNom')||{}).value || '';
+    for (var k = 0; k < window.waContacts.length; k++) {
+      var c = window.waContacts[k];
+      if ((prenomAffiche && c.prenom === prenomAffiche) || 
+          (nomAffiche && c.nom && c.nom.toUpperCase() === nomAffiche.toUpperCase())) {
+        tel = c.tel || '';
+        break;
+      }
+    }
+    // Source 4 : premier contact de la liste si un seul
+    if (!tel && window.waContacts.length === 1) tel = window.waContacts[0].tel || '';
+  }
+
   if (!tel) {
     var st = document.getElementById('waStatus');
-    if (st) { st.style.display='block'; st.className='wa-status err'; st.textContent="⚠️ Sélectionne un contact d'abord"; }
+    if (st) { st.style.display='block'; st.className='wa-status err'; st.textContent="⚠️ Remplis le numéro de téléphone"; }
     return;
   }
 
