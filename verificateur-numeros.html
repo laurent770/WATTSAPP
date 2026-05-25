@@ -35,6 +35,138 @@
       radial-gradient(ellipse at 80% 80%, rgba(99,102,241,0.05) 0%, transparent 50%);
   }
 
+  /* ═══ TABLEAU DE BORD DIRECTEUR ═══ */
+  .dashboard-btn {
+    position: fixed;
+    top: 16px;
+    right: 16px;
+    background: linear-gradient(135deg, #1e293b, #334155);
+    color: #fff;
+    border: none;
+    border-radius: 12px;
+    padding: 10px 18px;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.75rem;
+    font-weight: 700;
+    cursor: pointer;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+    transition: transform 0.2s;
+  }
+  .dashboard-btn:hover { transform: translateY(-2px); }
+
+  .dashboard-overlay {
+    display: none;
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0,0,0,0.5);
+    z-index: 2000;
+    align-items: center;
+    justify-content: center;
+  }
+  .dashboard-overlay.open { display: flex; }
+
+  .dashboard-panel {
+    background: #fff;
+    border-radius: 20px;
+    padding: 32px;
+    width: 680px;
+    max-width: 95vw;
+    max-height: 85vh;
+    overflow-y: auto;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+  }
+  .dashboard-panel h2 {
+    font-size: 1.4rem;
+    font-weight: 900;
+    color: #1e293b;
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .dash-close {
+    margin-left: auto;
+    background: #f1f5f9;
+    border: none;
+    border-radius: 8px;
+    padding: 6px 12px;
+    cursor: pointer;
+    font-size: 1rem;
+  }
+  .dash-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+  .dash-card {
+    background: linear-gradient(135deg, #f8fafc, #f1f5f9);
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 16px;
+    text-align: center;
+  }
+  .dash-card .val {
+    font-size: 2rem;
+    font-weight: 900;
+    font-family: 'Space Mono', monospace;
+    color: #1e293b;
+  }
+  .dash-card .val.green { color: #16a34a; }
+  .dash-card .val.red { color: #ef4444; }
+  .dash-card .val.blue { color: #2563eb; }
+  .dash-card .lbl {
+    font-size: 0.65rem;
+    font-weight: 700;
+    color: #64748b;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-top: 4px;
+  }
+  .dash-history {
+    border-top: 1px solid #e2e8f0;
+    padding-top: 20px;
+  }
+  .dash-history h3 {
+    font-size: 0.8rem;
+    font-weight: 800;
+    color: #475569;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+  .dash-history-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 12px;
+    border-radius: 8px;
+    background: #f8fafc;
+    margin-bottom: 8px;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.75rem;
+  }
+  .dash-history-row .date { color: #64748b; min-width: 90px; }
+  .dash-history-row .fichier { color: #1e293b; font-weight: 700; flex: 1; }
+  .dash-history-row .nb { color: #2563eb; font-weight: 900; }
+  .dash-dl-btn {
+    background: linear-gradient(135deg, #15803d, #16a34a);
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 6px 12px;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.7rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: opacity 0.2s;
+  }
+  .dash-dl-btn:hover { opacity: 0.85; }
+
   header {
     text-align: center;
     margin-bottom: 48px;
@@ -671,13 +803,13 @@
 /* ── WHATSAPP PANEL ── */
 .wa-container { max-width:520px; margin:0 auto; padding:20px 0; }
 .wa-card { background:rgba(255,255,255,0.03); border:1px solid rgba(37,211,102,0.15); border-radius:16px; padding:20px; margin-bottom:14px; }
-.wa-card-title { font-size:0.7rem; font-weight:700; color:#4a7a4a; letter-spacing:2px; text-transform:uppercase; font-family:'Space Mono',monospace; margin-bottom:12px; }
+.wa-card-title { font-size:0.7rem; font-weight:900; color:#111111; letter-spacing:2px; text-transform:uppercase; font-family:'Space Mono',monospace; margin-bottom:12px; }
 .wa-row { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:10px; }
 .wa-field { display:flex; flex-direction:column; gap:5px; }
-.wa-field label { font-size:0.7rem; font-weight:700; color:#4a7a4a; letter-spacing:1px; text-transform:uppercase; font-family:'Space Mono',monospace; }
-.wa-field input, .wa-field select { background:rgba(255,255,255,0.05); border:1.5px solid rgba(37,211,102,0.15); border-radius:9px; color:#e8f5e9; font-family:'Space Mono',monospace; font-size:0.88rem; padding:10px 14px; outline:none; width:100%; }
+.wa-field label { font-size:0.7rem; font-weight:900; color:#1a1a1a; letter-spacing:1px; text-transform:uppercase; font-family:'Space Mono',monospace; }
+.wa-field input, .wa-field select { background:#ffffff; border:2px solid #25D366; border-radius:9px; color:#111111; font-weight:700; font-family:'Space Mono',monospace; font-size:0.88rem; padding:10px 14px; outline:none; width:100%; }
 .wa-field input:focus, .wa-field select:focus { border-color:#25D366; }
-.wa-field input::placeholder { color:#2a4a2a; }
+.wa-field input::placeholder { color:#94a3b8; }
 .wa-tpls { display:flex; gap:6px; flex-wrap:wrap; margin-top:10px; }
 .wa-tpl { background:rgba(255,255,255,0.04); border:1px solid rgba(37,211,102,0.15); border-radius:6px; color:#4a7a4a; font-size:0.72rem; font-weight:700; padding:5px 10px; cursor:pointer; font-family:'Space Mono',monospace; }
 .wa-tpl:hover, .wa-tpl.active { border-color:#25D366; color:#25D366; background:rgba(37,211,102,0.06); }
@@ -696,8 +828,8 @@
 .wa-contact { display:flex; align-items:center; gap:10px; padding:8px 10px; border-radius:8px; border:1px solid rgba(37,211,102,0.1); margin-bottom:6px; cursor:pointer; transition:all 0.15s; }
 .wa-contact:hover { border-color:#25D366; background:rgba(37,211,102,0.04); }
 .wa-contact.selected { border-color:#25D366; background:rgba(37,211,102,0.08); }
-.wa-contact-name { font-weight:700; font-size:0.85rem; color:#e8f5e9; }
-.wa-contact-tel { font-size:0.72rem; color:#4a7a4a; font-family:'Space Mono',monospace; }
+.wa-contact-name { font-weight:900; font-size:0.85rem; color:#1a1a1a; }
+.wa-contact-tel { font-size:0.72rem; color:#1a1a1a; font-family:'Space Mono',monospace; font-weight:700; }
 .wa-contact-status { margin-left:auto; font-size:0.68rem; padding:2px 8px; border-radius:4px; font-weight:700; }
 .wa-pending { background:rgba(255,200,0,0.15); color:#ffc800; }
 .wa-sent { background:rgba(37,211,102,0.15); color:#25D366; }
@@ -742,6 +874,60 @@ var o=[];var l=Array.isArray(e);for(f=n.s.c;f<=n.e.c;++f)s[f]=ya(f);for(var c=n.
     <input type="text" id="licence-input" class="licence-input" placeholder="VERINUM-XXXXX-2025" maxlength="30" onkeydown="if(event.key==='Enter')verifierLicence()" autocomplete="off" />
     <button class="btn-licence" onclick="verifierLicence()">ACTIVER LA LICENCE</button>
     <div id="licence-status" class="licence-status"></div>
+  </div>
+</div>
+
+<!-- BOUTON TABLEAU DE BORD -->
+<button class="dashboard-btn" onclick="ouvrirDashboard()">
+  📊 Tableau de bord
+</button>
+
+<!-- PANNEAU TABLEAU DE BORD -->
+<div class="dashboard-overlay" id="dashboardOverlay" onclick="if(event.target===this)fermerDashboard()">
+  <div class="dashboard-panel">
+    <h2>
+      📊 Tableau de bord Directeur
+      <button class="dash-close" onclick="fermerDashboard()">✕</button>
+    </h2>
+    <div class="dash-grid">
+      <div class="dash-card">
+        <div class="val blue" id="dashTotal">0</div>
+        <div class="lbl">Leads importés</div>
+      </div>
+      <div class="dash-card">
+        <div class="val green" id="dashValides">0</div>
+        <div class="lbl">Valides</div>
+      </div>
+      <div class="dash-card">
+        <div class="val red" id="dashHS">0</div>
+        <div class="lbl">Hors service</div>
+      </div>
+      <div class="dash-card">
+        <div class="val" id="dashMobiles">0</div>
+        <div class="lbl">Mobiles</div>
+      </div>
+      <div class="dash-card">
+        <div class="val" id="dashFixes">0</div>
+        <div class="lbl">Fixes</div>
+      </div>
+      <div class="dash-card">
+        <div class="val" style="font-size:1rem" id="dashDate">—</div>
+        <div class="lbl">Dernier import</div>
+      </div>
+    </div>
+    <div style="margin-bottom:16px">
+      <button class="dash-dl-btn" style="width:100%;padding:12px;font-size:0.85rem" onclick="exporterExcelComplet()">
+        📥 Télécharger fichier complet enrichi (.xlsx)
+      </button>
+    </div>
+    <div class="dash-history">
+      <h3>📁 Historique des imports</h3>
+      <div id="dashHistorique">
+        <div style="color:#94a3b8;font-family:Space Mono,monospace;font-size:0.75rem;text-align:center;padding:20px">
+          Aucun import pour l'instant
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -917,6 +1103,157 @@ function exporterExcelFinal() {
   setTimeout(function(){ document.body.removeChild(a); URL.revokeObjectURL(url); }, 1000);
 }
 
+// ═══════════════════════════════════════════════
+// EXPORT COMPLET ENRICHI (depuis le dashboard)
+// ═══════════════════════════════════════════════
+function exporterExcelComplet() {
+  if (typeof allResults === 'undefined' || allResults.length === 0) {
+    alert("Aucun résultat à exporter — vérifiez dabord les numéros !");
+    return;
+  }
+  if (typeof XLSX === 'undefined') { alert('Bibliothèque Excel non chargée !'); return; }
+
+  var dateImport = window._dashDateImport ? new Date(window._dashDateImport).toLocaleString('fr-FR') : new Date().toLocaleString('fr-FR');
+  var nomFichier = window._dashNomFichier || 'inconnu';
+
+  // En-têtes enrichis
+  var rows = [[
+    'N°', 'Numéro', 'Format International', 'Statut', 'Type', 'Opérateur', 'Territoire',
+    'Prénom', 'Nom', 'Ville', 'Code Postal', 'Adresse',
+    'Tel Fixe', 'Notes', 'Vérifié', 'Statut HLR',
+    'Date import', 'Fichier source'
+  ]];
+
+  allResults.forEach(function(r, i) {
+    var prenom  = (document.getElementById('prenom_'+i)||{}).value  || (window._nomsImportes ? (window._nomsImportes[r.original]||'').split(' ')[0] : '') || '';
+    var nom     = (document.getElementById('nom_'+i)||{}).value     || (window._nomsImportes ? (window._nomsImportes[r.original]||'').split(' ').slice(1).join(' ') : '') || '';
+    var ville   = (document.getElementById('ville_'+i)||{}).value   || (window._villesImportees   ? window._villesImportees[r.original]   || '' : '');
+    var adresse = (document.getElementById('adresse_'+i)||{}).value || (window._adressesImportees ? window._adressesImportees[r.original] || '' : '');
+    var fixe    = (document.getElementById('fixe_'+i)||{}).value    || '';
+    var notes   = (document.getElementById('notes_'+i)||{}).value   || '';
+    var ouiR    = document.querySelector('input[name="verif_'+i+'"][value="oui"]');
+    var nonR    = document.querySelector('input[name="verif_'+i+'"][value="non"]');
+    var verif   = ouiR&&ouiR.checked ? 'OUI' : (nonR&&nonR.checked ? 'NON' : '');
+    var hlr     = r.hlrStatut || '';
+    var numIntl = (window.normTelInternational ? window.normTelInternational(r.original || r.numero) : r.numero);
+
+    rows.push([
+      i+1, r.numero, numIntl,
+      r.valide ? 'VALIDE' : 'HORS SERVICE',
+      r.type || '', r.operateur || '', r.pays || '',
+      prenom, nom, ville, '', adresse,
+      fixe, notes, verif, hlr,
+      dateImport, nomFichier
+    ]);
+  });
+
+  var wb = XLSX.utils.book_new();
+  var ws = XLSX.utils.aoa_to_sheet(rows);
+
+  // Largeurs des colonnes
+  ws['!cols'] = [
+    {wch:4},{wch:14},{wch:16},{wch:12},{wch:8},{wch:20},{wch:12},
+    {wch:14},{wch:16},{wch:16},{wch:10},{wch:28},
+    {wch:14},{wch:20},{wch:8},{wch:12},
+    {wch:18},{wch:20}
+  ];
+
+  XLSX.utils.book_append_sheet(wb, ws, 'Leads enrichis');
+
+  // Onglet statistiques
+  var stats = [
+    ['STATISTIQUES VERINUM', ''],
+    ['Date dexport', new Date().toLocaleString('fr-FR')],
+    ['Fichier source', nomFichier],
+    ['Date dimport', dateImport],
+    ['', ''],
+    ['Total leads', allResults.length],
+    ['Valides', allResults.filter(function(r){return r.valide;}).length],
+    ['Hors service', allResults.filter(function(r){return !r.valide;}).length],
+    ['Mobiles', allResults.filter(function(r){return r.valide && r.type==='mobile';}).length],
+    ['Fixes', allResults.filter(function(r){return r.valide && r.type==='fixe';}).length],
+    ['Taux de validité', Math.round(allResults.filter(function(r){return r.valide;}).length / allResults.length * 100) + '%'],
+  ];
+  var wsStats = XLSX.utils.aoa_to_sheet(stats);
+  wsStats['!cols'] = [{wch:22},{wch:20}];
+  XLSX.utils.book_append_sheet(wb, wsStats, 'Statistiques');
+
+  var wbout = XLSX.write(wb, {bookType:'xlsx', type:'array'});
+  var blob = new Blob([wbout], {type:'application/octet-stream'});
+  var url = URL.createObjectURL(blob);
+  var a = document.createElement('a');
+  a.href = url;
+  a.download = 'VERINUM_COMPLET_' + new Date().toISOString().slice(0,10) + '.xlsx';
+  document.body.appendChild(a); a.click();
+  setTimeout(function(){ document.body.removeChild(a); URL.revokeObjectURL(url); }, 1000);
+  fermerDashboard();
+}
+
+// ═══════════════════════════════════════════════
+// TABLEAU DE BORD — Fonctions
+// ═══════════════════════════════════════════════
+var _dashHistorique = JSON.parse(localStorage.getItem('verinum_historique') || '[]');
+
+function ouvrirDashboard() {
+  mettreAJourDashboard();
+  document.getElementById('dashboardOverlay').classList.add('open');
+}
+
+function fermerDashboard() {
+  document.getElementById('dashboardOverlay').classList.remove('open');
+}
+
+function mettreAJourDashboard() {
+  var total    = (typeof allResults !== 'undefined') ? allResults.length : 0;
+  var valides  = (typeof allResults !== 'undefined') ? allResults.filter(function(r){return r.valide;}).length : 0;
+  var hs       = total - valides;
+  var mobiles  = (typeof allResults !== 'undefined') ? allResults.filter(function(r){return r.valide && r.type==='mobile';}).length : 0;
+  var fixes    = (typeof allResults !== 'undefined') ? allResults.filter(function(r){return r.valide && r.type==='fixe';}).length : 0;
+
+  document.getElementById('dashTotal').textContent    = total;
+  document.getElementById('dashValides').textContent  = valides;
+  document.getElementById('dashHS').textContent       = hs;
+  document.getElementById('dashMobiles').textContent  = mobiles;
+  document.getElementById('dashFixes').textContent    = fixes;
+
+  var dateEl = document.getElementById('dashDate');
+  if (window._dashDateImport) {
+    var d = new Date(window._dashDateImport);
+    dateEl.textContent = d.toLocaleDateString('fr-FR') + ' ' + d.toLocaleTimeString('fr-FR', {hour:'2-digit', minute:'2-digit'});
+  } else {
+    dateEl.textContent = '—';
+  }
+
+  // Historique
+  var histo = document.getElementById('dashHistorique');
+  if (_dashHistorique.length === 0) {
+    histo.innerHTML = '<div style="color:#94a3b8;font-family:Space Mono,monospace;font-size:0.75rem;text-align:center;padding:20px">Aucun import pour linstant</div>';
+  } else {
+    histo.innerHTML = _dashHistorique.slice().reverse().map(function(h) {
+      return '<div class="dash-history-row">' +
+        '<span class="date">' + h.date + '</span>' +
+        '<span class="fichier">📄 ' + h.fichier + '</span>' +
+        '<span class="nb">' + h.total + ' leads</span>' +
+        '<span style="color:#16a34a;font-weight:900">' + h.valides + ' ✓</span>' +
+      '</div>';
+    }).join('');
+  }
+}
+
+function enregistrerImportDashboard(nomFichier, total, valides) {
+  window._dashDateImport = Date.now();
+  window._dashNomFichier = nomFichier;
+  var entry = {
+    date: new Date().toLocaleDateString('fr-FR') + ' ' + new Date().toLocaleTimeString('fr-FR', {hour:'2-digit', minute:'2-digit'}),
+    fichier: nomFichier,
+    total: total,
+    valides: valides
+  };
+  _dashHistorique.push(entry);
+  if (_dashHistorique.length > 20) _dashHistorique.shift(); // garder 20 derniers
+  try { localStorage.setItem('verinum_historique', JSON.stringify(_dashHistorique)); } catch(e) {}
+}
+
 // ===== COPIER FALLBACK =====
 function copierFallback(texte) {
   var el = document.createElement('textarea');
@@ -1065,6 +1402,15 @@ function copierFallback(texte) {
 
     document.getElementById('statsSection').style.display = 'grid';
     document.getElementById('resultsSection').style.display = 'block';
+
+    // Mettre à jour le tableau de bord avec les résultats finaux
+    if (window._dashNomFichier && typeof enregistrerImportDashboard === 'function') {
+      enregistrerImportDashboard(
+        window._dashNomFichier,
+        allResults.length,
+        allResults.filter(function(r){return r.valide;}).length
+      );
+    }
   }
 
   function afficherStats() {
@@ -1805,6 +2151,8 @@ function copierFallback(texte) {
         if (typeof waRenderContacts === "function") waRenderContacts();
         if (typeof waUpdateStats === "function") waUpdateStats();
         status.innerHTML = '<span style="background:#dcfce7;border:2px solid #16a34a;border-radius:8px;padding:10px 18px;color:#15803d;font-size:1rem;font-weight:800;display:inline-block;margin-top:4px;">✅ ' + numeros.length + ' numéro(s) importé(s) — colonne ' + colLettre + ' !</span>';
+        // Enregistrer dans le tableau de bord
+        enregistrerImportDashboard(file.name, numeros.length, 0);
 
       } catch(err) {
         status.innerHTML = '❌ Erreur : ' + err.message;
@@ -1911,7 +2259,7 @@ function copierFallback(texte) {
     
     body.innerHTML = 
       '<a href="' + pbUrl + '" target="_blank" class="pb-panel-link">🔍 Ouvrir Pages Blanches — ' + label + ' ↗</a>' +
-      '<div class="pb-panel-note">Pages Blanches va s\'ouvrir avec le nom et la ville deja pre-remplis</div>';
+      '<div class="pb-panel-note">Pages Blanches va souvrir avec le nom et la ville deja pre-remplis</div>';
   }
   
   function fermerPB(index) {
@@ -2151,67 +2499,44 @@ function waGetMsg() {
 // Variables backup déjà sur window
 
 function waEnvoyerFinal() {
-  // Lire le numéro depuis TOUTES les sources disponibles
-  var tel = '';
-  
-  // Source 1 : champ DOM waTelephone
-  var fTel = document.getElementById('waTelephone');
-  if (fTel && fTel.value.trim()) tel = fTel.value.trim();
-  
-  // Source 2 : stockage global
-  if (!tel && window._waTelCourant) tel = window._waTelCourant;
-  
-  // Source 3 : parcourir tous les contacts et prendre le premier qui match le prénom affiché
-  if (!tel && window.waContacts && window.waContacts.length > 0) {
-    var prenomAffiche = (document.getElementById('waPrenom')||{}).value || '';
-    var nomAffiche = (document.getElementById('waNom')||{}).value || '';
-    for (var k = 0; k < window.waContacts.length; k++) {
-      var c = window.waContacts[k];
-      if ((prenomAffiche && c.prenom === prenomAffiche) || 
-          (nomAffiche && c.nom && c.nom.toUpperCase() === nomAffiche.toUpperCase())) {
-        tel = c.tel || '';
-        break;
+  // Lire le numéro
+  var tel = ((document.getElementById('waTelephone')||{}).value||'').trim()
+          || window._waTelCourant || '';
+
+  // Chercher dans les contacts si toujours vide
+  if (!tel && window.waContacts) {
+    var prenom0 = ((document.getElementById('waPrenom')||{}).value||'').trim();
+    var nom0    = ((document.getElementById('waNom')||{}).value||'').trim().toUpperCase();
+    for (var k=0; k<window.waContacts.length; k++) {
+      var ck = window.waContacts[k];
+      if ((prenom0 && ck.prenom===prenom0)||(nom0 && (ck.nom||'').toUpperCase()===nom0)){
+        tel = ck.tel||''; break;
       }
     }
-    // Source 4 : premier contact de la liste si un seul
-    if (!tel && window.waContacts.length === 1) tel = window.waContacts[0].tel || '';
   }
 
   if (!tel) {
-    var st = document.getElementById('waStatus');
-    if (st) { st.style.display='block'; st.className='wa-status err'; st.textContent="⚠️ Remplis le numéro de téléphone"; }
+    var st=document.getElementById('waStatus');
+    if(st){st.style.display='block';st.className='wa-status err';st.textContent="⚠️ Sélectionne un contact d'abord";}
     return;
   }
 
-  var telNum = (window.normTelInternational ? window.normTelInternational(tel) : tel).replace(/[^0-9]/g,'');
-  var prenom = ((document.getElementById('waPrenom')||{}).value||'').trim() || window._waPrenomCourant || 'Prénom';
-  var nom    = (((document.getElementById('waNom')||{}).value||'').trim() || window._waNomCourant || '').toUpperCase();
-  var civ    = waGetCiv(prenom, (document.getElementById('waCivilite')||{}).value||'');
-  var msg    = WA_TEMPLATES[waTpl](civ, prenom, nom);
-  var urlWa  = 'https://wa.me/' + telNum + '?text=' + encodeURIComponent(msg);
-  var urlApp = 'whatsapp://send?phone=' + telNum + '&text=' + encodeURIComponent(msg);
+  var telNum = (window.normTelInternational?window.normTelInternational(tel):tel).replace(/[^0-9]/g,'');
+  var prenom = ((document.getElementById('waPrenom')||{}).value||'').trim()||window._waPrenomCourant||'Prénom';
+  var nom    = (((document.getElementById('waNom')||{}).value||'').trim()||window._waNomCourant||'').toUpperCase();
+  var civ    = waGetCiv(prenom,(document.getElementById('waCivilite')||{}).value||'');
+  var msg    = WA_TEMPLATES[waTpl](civ,prenom,nom);
+  var url    = 'https://wa.me/'+telNum+'?text='+encodeURIComponent(msg);
 
-  // Copier le message dans le presse-papier (toujours)
-  try { navigator.clipboard.writeText(msg); } catch(e) {}
+  // Ouvrir WhatsApp directement
+  window.open(url,'_blank');
 
   // Marquer envoyé
-  if (window.waSelected >= 0 && window.waContacts && window.waContacts[window.waSelected]) {
-    window.waContacts[window.waSelected].status = 'sent';
-    setTimeout(function(){ waRenderContacts(); waUpdateStats(); }, 500);
-  }
-
-  // Afficher les boutons d'envoi
-  var status = document.getElementById('waStatus');
-  if (status) {
-    status.style.display = 'block';
-    status.className = 'wa-status ok';
-    status.innerHTML =
-      '<div style="margin-bottom:8px">📋 <b>Message copié !</b> Choisis comment envoyer :</div>' +
-      '<div style="display:flex;gap:8px;flex-wrap:wrap">' +
-        '<a href="' + urlApp + '" style="background:#25D366;color:#fff;padding:8px 14px;border-radius:8px;text-decoration:none;font-weight:800;font-size:0.82rem">📱 WhatsApp App</a>' +
-        '<a href="' + urlWa  + '" target="_blank" style="background:#128C7E;color:#fff;padding:8px 14px;border-radius:8px;text-decoration:none;font-weight:800;font-size:0.82rem">🌐 WhatsApp Web</a>' +
-      '</div>' +
-      '<div style="margin-top:6px;font-size:0.72rem;opacity:0.7">Le message est déjà copié — colle-le si besoin (Ctrl+V)</div>';
+  var status=document.getElementById('waStatus');
+  if(status){status.style.display='block';status.className='wa-status ok';status.textContent='✅ WhatsApp ouvert pour +'+telNum;}
+  if(window.waSelected>=0&&window.waContacts&&window.waContacts[window.waSelected]){
+    window.waContacts[window.waSelected].status='sent';
+    setTimeout(function(){waRenderContacts();waUpdateStats();},500);
   }
 }
 
@@ -2255,53 +2580,57 @@ function waCopier() {
 
 function waSelectContact(i) {
   window.waSelected = i;
-  const c = window.waContacts[i];
+  var contacts = window.waContacts || [];
+  if (!contacts[i]) return;
+  var c = contacts[i];
 
-  // Normaliser le tel dans l'objet contact une bonne fois pour toutes
-  c.tel = (window.normTelInternational || function(t){return t;})(c.tel || '');
-
-  // Remplir les champs
-  const fPrenom = document.getElementById('waPrenom');
-  const fNom    = document.getElementById('waNom');
-  const fTel    = document.getElementById('waTelephone');
-  const fCiv    = document.getElementById('waCivilite');
-
-  if (fPrenom) fPrenom.value = c.prenom || '';
-  if (fNom)    fNom.value    = c.nom    || '';
   // Normaliser le numéro
-  var telOk = c.tel || '';
-  if (telOk && !telOk.startsWith('+') && window.normTelInternational) {
-    telOk = window.normTelInternational(telOk);
-    c.tel = telOk;
-  }
-  if (fTel) fTel.value = telOk;
-  if (fCiv) fCiv.value = '';
-  // Stocker globalement (backup si DOM inaccessible)
-  window._waTelCourant    = telOk;
+  var tel = c.tel || '';
+  if (tel && window.normTelInternational) tel = window.normTelInternational(tel);
+  c.tel = tel;
+
+  // Stocker globalement
+  window._waTelCourant    = tel;
   window._waPrenomCourant = c.prenom || '';
   window._waNomCourant    = c.nom    || '';
 
-  // Mettre à jour aperçu
-  const prenom2 = c.prenom || 'Prénom';
-  const nom2 = (c.nom || '').toUpperCase();
-  const civ2 = waGetCiv(prenom2, '');
-  document.getElementById('waPreview').textContent = WA_TEMPLATES[waTpl](civ2, prenom2, nom2);
+  // Remplir immédiatement ET après un délai (double sécurité)
+  function forceRemplir() {
+    var fPrenom = document.getElementById('waPrenom');
+    var fNom    = document.getElementById('waNom');
+    var fTel    = document.getElementById('waTelephone');
+    var fCiv    = document.getElementById('waCivilite');
+    if (!fPrenom) return false;
+    
+    var nativeInputValueSetter = Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, 'value').set;
+    nativeInputValueSetter.call(fPrenom, c.prenom || '');
+    nativeInputValueSetter.call(fNom,    c.nom    || '');
+    nativeInputValueSetter.call(fTel,    tel);
+    if (fCiv) fCiv.value = '';
 
-  // Activer le bouton EN DERNIER (après waUpdatePreview qui pourrait le remettre disabled)
-  setTimeout(function() {
-    const btnSend = document.getElementById('waBtnSend');
-    if (btnSend && telOk) btnSend.disabled = false;
-  }, 50);
-  // Re-render liste (highlight contact sélectionné)
-  waRenderContacts();
+    fPrenom.dispatchEvent(new Event('input',  {bubbles:true}));
+    fNom.dispatchEvent(new Event('input',     {bubbles:true}));
+    fTel.dispatchEvent(new Event('input',     {bubbles:true}));
 
-  // Scroll vers la section "Contact sélectionné"
-  const contactCard = fCiv ? fCiv.closest('.wa-card') : null;
-  if (contactCard) {
-    setTimeout(function() {
-      contactCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }, 100);
+    // Aperçu
+    var prenom = c.prenom || 'Prénom';
+    var nom    = (c.nom || '').toUpperCase();
+    var civ    = waGetCiv(prenom, '');
+    var preview = document.getElementById('waPreview');
+    if (preview) preview.textContent = WA_TEMPLATES[waTpl](civ, prenom, nom);
+
+    var btn = document.getElementById('waBtnSend');
+    if (btn) btn.disabled = false;
+    return true;
   }
+
+  forceRemplir();
+  setTimeout(forceRemplir, 100);
+  setTimeout(forceRemplir, 300);
+  setTimeout(forceRemplir, 600);
+
+  // Re-render liste pour highlight
+  waRenderContacts();
 }
 
 function waSignerContact(i) {
