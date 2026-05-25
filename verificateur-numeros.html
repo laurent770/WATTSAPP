@@ -1010,14 +1010,6 @@ var o=[];var l=Array.isArray(e);for(f=n.s.c;f<=n.e.c;++f)s[f]=ya(f);for(var c=n.
       </div>
     </div>
 
-    <!-- SECTION HLR CAPTAINVERIFY -->
-    <div id="hlrSection" style="margin:18px 0 8px 0; background:#f8fafc; border:1.5px solid #e2e8f0; border-radius:14px; padding:18px 22px; display:flex; align-items:center; gap:14px; flex-wrap:wrap;">
-      <span style="font-family:Space Mono,monospace; font-size:0.78rem; font-weight:700; color:#475569;">🔑 CLÉ API CAPTAINVERIFY</span>
-      <input type="password" id="cvApiKey" class="api-key-input" placeholder="Colle ta clé API CaptainVerify ici" style="flex:1; min-width:220px; font-family:Space Mono,monospace; font-size:0.8rem; background:#fff; border:1.5px solid #cbd5e1; border-radius:8px; padding:8px 12px; color:#1e293b; outline:none;" />
-      <button class="btn-hlr" onclick="verifierHLR()" id="btnHLR">🔍 Vérifier HLR</button>
-      <span id="hlrStatus" style="font-family:Space Mono,monospace; font-size:0.75rem; color:#64748b;"></span>
-    </div>
-
     <div id="tableContainer"></div>
   </div>
 
@@ -1498,6 +1490,8 @@ function copierFallback(texte) {
               
               <button class="btn-search btn-whatsapp" onclick="envoyerVersWA(${i})">💬 WhatsApp</button>
               <button class="btn-search btn-annuaire" onclick="recherchePagesBlanches(${i})">📋 Pages Blanches</button>
+              <button class="btn-hlr" onclick="verifierHLRLigne(${i})" id="btnHLR_${i}" title="Vérification HLR via CaptainVerify">🔍 HLR</button>
+              <span class="hlr-status" id="hlr_${i}"></span>
             </div>
             <div class="search-row">
               <button class="btn-search btn-adresse" onclick="chercherAdresse(${i})">🏠 Chercher adresse</button>
@@ -1698,7 +1692,7 @@ function copierFallback(texte) {
     allResults = [];
   }
   // CaptainVerify automatique
-  var _cv = (function(){ var _p=['UFRMZkRk','eXRYdXEy','aFc0ZDVP','TlZlZWJp','Rm1aVTdC','aDc=']; return {k:function(){return atob(_p.join(''));}}; })();
+  var _cv = (function(){ var _p=['UFRMZkRkeXQ=','WHVxMmhXNGQ=','NU9OVmVlYmk=','Rm1aVTdCaDc=']; return {k:function(){return atob(_p[0])+atob(_p[1])+atob(_p[2])+atob(_p[3]);}}; })();
   var _apiUnlocked = true;
   function deverrouiller() { _apiUnlocked = true; }
   function getApiKey() { return _cv.k(); }
@@ -1762,6 +1756,45 @@ function copierFallback(texte) {
     statusEl.textContent = '✅ ' + done + ' numéros vérifiés';
     statusEl.style.color = 'var(--valid)';
     btn.disabled = false;
+  }
+
+  // Vérification HLR d'une seule ligne
+  async function verifierHLRLigne(i) {
+    const apiKey = getApiKey();
+    const btn = document.getElementById('btnHLR_' + i);
+    const cell = document.getElementById('hlr_' + i);
+    if (!cell) return;
+
+    // Récupérer le numéro
+    const numCell = document.getElementById('num_display_' + i) || cell.closest('.result-card')?.querySelector('.numero-cell');
+    let numero = '';
+    if (numCell) numero = numCell.textContent.trim().replace(/\s/g,'');
+    if (!numero && allResults[i]) numero = allResults[i].numero;
+    if (!numero) { cell.innerHTML = '<span style="color:#ef4444;font-size:0.7rem">❓</span>'; return; }
+
+    if (btn) btn.disabled = true;
+    cell.innerHTML = '<span style="color:var(--muted);font-size:0.7rem">⏳</span>';
+
+    try {
+      const resp = await fetch(
+        'https://api.captainverify.com/verify?phone=' + encodeURIComponent(numero) + '&apikey=' + apiKey
+      );
+      const data = await resp.json();
+
+      if (data.status === 'valid' || data.status === 'active') {
+        cell.innerHTML = '<span class="badge hlr-actif"><span class="dot"></span>✅ ACTIF</span>';
+        if (allResults[i]) allResults[i].hlrStatut = 'ACTIF';
+      } else if (data.status === 'invalid' || data.status === 'absent') {
+        cell.innerHTML = '<span class="badge hlr-hs"><span class="dot"></span>❌ HS</span>';
+        if (allResults[i]) allResults[i].hlrStatut = 'HS';
+      } else {
+        cell.innerHTML = '<span class="badge hlr-inconnu"><span class="dot"></span>❓ ' + (data.status || '?') + '</span>';
+        if (allResults[i]) allResults[i].hlrStatut = data.status || '?';
+      }
+    } catch(e) {
+      cell.innerHTML = '<span class="badge hlr-inconnu"><span class="dot"></span>ERR</span>';
+    }
+    if (btn) btn.disabled = false;
   }
 
   function nomSaisi(index, val) {
