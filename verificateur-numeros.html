@@ -1009,6 +1009,15 @@ var o=[];var l=Array.isArray(e);for(f=n.s.c;f<=n.e.c;++f)s[f]=ya(f);for(var c=n.
         <button class="btn-search btn-tout" onclick="rechercheGroupeeTout()" title="Ouvre sync.me pour tous les numéros">⚡ Tout rechercher</button>
       </div>
     </div>
+
+    <!-- SECTION HLR CAPTAINVERIFY -->
+    <div id="hlrSection" style="margin:18px 0 8px 0; background:#f8fafc; border:1.5px solid #e2e8f0; border-radius:14px; padding:18px 22px; display:flex; align-items:center; gap:14px; flex-wrap:wrap;">
+      <span style="font-family:Space Mono,monospace; font-size:0.78rem; font-weight:700; color:#475569;">🔑 CLÉ API CAPTAINVERIFY</span>
+      <input type="password" id="cvApiKey" class="api-key-input" placeholder="Colle ta clé API CaptainVerify ici" style="flex:1; min-width:220px; font-family:Space Mono,monospace; font-size:0.8rem; background:#fff; border:1.5px solid #cbd5e1; border-radius:8px; padding:8px 12px; color:#1e293b; outline:none;" />
+      <button class="btn-hlr" onclick="verifierHLR()" id="btnHLR">🔍 Vérifier HLR</button>
+      <span id="hlrStatus" style="font-family:Space Mono,monospace; font-size:0.75rem; color:#64748b;"></span>
+    </div>
+
     <div id="tableContainer"></div>
   </div>
 
